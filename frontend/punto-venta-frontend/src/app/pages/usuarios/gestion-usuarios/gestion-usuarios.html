@@ -1,0 +1,150 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="page-container">
+
+  <h1>Gestión de usuarios</h1>
+
+  <div class="toolbar">
+
+    <input
+      type="text"
+      placeholder="Buscar cliente o administrador"
+      [(ngModel)]="busqueda">
+
+    <button
+      type="button"
+      (click)="buscar()">
+      Buscar
+    </button>
+
+    <select
+  [ngModel]="filtroRol"
+  (ngModelChange)="cambiarFiltro($event)">
+
+  <option value="AMBOS">Ambos</option>
+  <option value="CLIENTE">Cliente</option>
+  <option value="ADMINISTRADOR">Administrador</option>
+
+</select>
+
+  </div>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      @for (usuario of usuarios; track usuario.id) {
+
+        <tr>
+
+          <td>
+            {{ usuario.nombre }}
+            {{ usuario.apellidoPaterno }}
+            {{ usuario.apellidoMaterno }}
+          </td>
+
+          <td>{{ usuario.email }}</td>
+
+          <td>{{ usuario.rol }}</td>
+
+          <td>{{ usuario.activo ? 'Activo' : 'Inactivo' }}</td>
+
+          <td>
+
+            @if (usuario.rol?.toUpperCase() === 'CLIENTE' && usuario.activo) {
+
+              <button
+                class="admin-btn"
+                type="button"
+                (click)="hacerAdministrador(usuario)">
+                Hacer administrador
+              </button>
+
+            }
+
+            @if (usuario.rol?.toUpperCase() === 'ADMINISTRADOR' && usuario.activo) {
+
+              <button
+                class="warning-btn"
+                type="button"
+                (click)="abrirModalEliminarAdministrador(usuario)">
+                Eliminar administrador
+              </button>
+
+            }
+
+            @if (usuario.activo) {
+
+              <button
+                class="danger-btn"
+                type="button"
+                (click)="abrirModalDesactivar(usuario)">
+                Desactivar
+              </button>
+
+            }
+
+            @if (!usuario.activo) {
+
+              <button
+                class="success-btn"
+                type="button"
+                (click)="reactivar(usuario)">
+                Reactivar
+              </button>
+
+            }
+
+          </td>
+
+        </tr>
+
+      }
+
+    </tbody>
+
+  </table>
+
+</div>
+
+@if (mostrarModal) {
+
+  <div class="modal-overlay">
+
+    <div class="modal-card">
+
+      <p>{{ mensajeModal }}</p>
+
+      <div class="modal-actions">
+
+        <button
+          class="accept-btn"
+          type="button"
+          (click)="aceptarModal()">
+          Aceptar
+        </button>
+
+        <button
+          class="cancel-btn"
+          type="button"
+          (click)="cancelarModal()">
+          Cancelar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+}

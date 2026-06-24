@@ -1,0 +1,114 @@
+<app-cliente-navbar></app-cliente-navbar>
+
+<div class="page-container">
+
+  <h1>Carrito de compras</h1>
+
+  @if (productos.length === 0) {
+
+    <div class="empty-cart">
+      <h2>No hay productos agregados en el carrito</h2>
+    </div>
+
+  } @else {
+
+    <div class="productos-container">
+
+      @for (producto of productos; track producto.id) {
+
+        <div class="producto-card">
+
+          <img
+            class="producto-imagen"
+            [src]="producto.imagenUrl || 'https://placehold.co/300x200/png'"
+            alt="Producto">
+
+          <div class="producto-info">
+
+            <h3>{{ producto.nombre }}</h3>
+
+            <p>
+              Precio por unidad:
+              ${{ producto.precioVenta }}
+            </p>
+
+            <p>
+              Costo Total:
+              ${{ producto.precioVenta * producto.cantidad }}
+            </p>
+
+            <div class="cantidad-container">
+
+              <label>Unidades</label>
+
+              <select
+                [(ngModel)]="producto.cantidad"
+                (change)="actualizarCantidad()">
+
+                @for (unidad of obtenerOpcionesStock(producto); track unidad) {
+                  <option [ngValue]="unidad">
+                    {{ unidad }}
+                  </option>
+                }
+
+              </select>
+
+            </div>
+
+          </div>
+
+          <button
+            class="delete-btn"
+            type="button"
+            (click)="eliminarProducto(producto)">
+            Eliminar
+          </button>
+
+        </div>
+
+      }
+
+    </div>
+
+    <div class="resumen">
+
+      <h2>Resumen</h2>
+
+      <p>
+        Subtotal:
+        ${{ subtotal.toFixed(2) }}
+      </p>
+
+      <p>
+        IVA (16%):
+        ${{ iva.toFixed(2) }}
+      </p>
+
+      <p class="total">
+        Precio total:
+        ${{ total.toFixed(2) }}
+      </p>
+
+      <div class="acciones">
+
+        <button
+          class="vaciar-btn"
+          type="button"
+          (click)="vaciarCarrito()">
+          Vaciar Carrito
+        </button>
+
+        <button
+          class="comprar-btn"
+          type="button"
+          (click)="comprar()">
+          Comprar
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

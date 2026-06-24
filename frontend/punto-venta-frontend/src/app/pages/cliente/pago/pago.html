@@ -1,0 +1,74 @@
+<app-cliente-navbar></app-cliente-navbar>
+
+<div class="page-container">
+
+  <div class="pago-card">
+
+    <h1>Registro y Confirmación de Pago</h1>
+
+    <p class="subtitle">
+      Por favor, ingrese el efectivo entregado por el cliente para completar la transacción.
+    </p>
+
+    <div class="total-box">
+      <span>Total a pagar</span>
+      <strong>${{ total.toFixed(2) }}</strong>
+    </div>
+
+    <label>Monto con el que paga</label>
+
+    <input
+      type="number"
+      placeholder="$0.00"
+      [(ngModel)]="montoRecibido"
+      (input)="validarPago()">
+
+    <p class="error">{{ error }}</p>
+
+    <div class="cambio-box">
+      Su cambio es: ${{ cambio.toFixed(2) }}
+    </div>
+
+    <div class="acciones">
+
+      <button
+        class="cancelar-btn"
+        type="button"
+        (click)="cancelar()">
+        Cancelar
+      </button>
+
+      <button
+        class="finalizar-btn"
+        type="button"
+        [disabled]="!puedeFinalizar()"
+        (click)="finalizarTransaccion()">
+         {{ procesandoPago ? 'Procesando...' : 'Finalizar Transacción' }}
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+@if (mostrarModalExito) {
+
+  <div class="modal-overlay">
+
+    <div class="modal-card">
+
+      <p>Compra finalizada con éxito</p>
+
+      <button
+        class="accept-btn"
+        type="button"
+        (click)="aceptarCompraFinalizada()">
+        Aceptar
+      </button>
+
+    </div>
+
+  </div>
+
+}

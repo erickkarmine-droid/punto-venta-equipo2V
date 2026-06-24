@@ -1,65 +1,86 @@
-<div class="registro-container">
-  <div class="registro-card">
+<div class="auth-page">
 
-    <h1>Registro de Cliente</h1>
+  <section class="auth-hero">
+    <div class="brand-badge">POS</div>
+
+    <h1>MiniMarket Online</h1>
+
+    <p>
+      Crea tu cuenta y comienza a utilizar la plataforma
+      de gestión de productos y ventas.
+    </p>
+  </section>
+
+  <section class="auth-card">
+
+    <h2>Crear cuenta</h2>
+
+    <p class="subtitle">
+      Completa los datos para registrarte
+    </p>
 
     <form (ngSubmit)="registrar()">
 
+      <label>Nombre</label>
       <input
         type="text"
-        placeholder="Nombre"
         name="nombre"
+        placeholder="Ingresa tu nombre"
         [(ngModel)]="nombre">
 
+      <label>Apellido paterno</label>
       <input
         type="text"
-        placeholder="Apellido paterno"
         name="apellidoPaterno"
+        placeholder="Ingresa tu apellido paterno"
         [(ngModel)]="apellidoPaterno">
 
+      <label>Apellido materno</label>
       <input
         type="text"
-        placeholder="Apellido materno"
         name="apellidoMaterno"
+        placeholder="Ingresa tu apellido materno"
         [(ngModel)]="apellidoMaterno">
 
+      <label>Correo electrónico</label>
       <input
         type="email"
-        placeholder="Correo electrónico"
         name="email"
+        placeholder="Ingresa tu correo"
         [(ngModel)]="email">
 
+      <label>Contraseña</label>
       <input
         type="password"
-        placeholder="Contraseña"
         name="password"
+        placeholder="Ingresa tu contraseña"
         [(ngModel)]="password">
 
+      <label>Teléfono</label>
       <input
         type="text"
-        placeholder="Teléfono (10 dígitos)"
         name="telefono"
+        maxlength="10"
+        placeholder="10 dígitos, ejemplo: 5512345678"
         [(ngModel)]="telefono">
 
-      <button type="submit">
+      <button class="primary-btn" type="submit">
         Registrarse
       </button>
 
       <button
+        class="secondary-btn"
         type="button"
         (click)="irALogin()">
         Regresar
       </button>
 
-      <p class="success">
-        {{ mensaje }}
-      </p>
+      <p class="success">{{ mensaje }}</p>
 
-      <p class="error">
-        {{ error }}
-      </p>
+      <p class="error">{{ error }}</p>
 
     </form>
 
-  </div>
+  </section>
+
 </div>

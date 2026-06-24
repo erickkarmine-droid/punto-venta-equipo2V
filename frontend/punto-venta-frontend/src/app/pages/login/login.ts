@@ -11,6 +11,7 @@ import { Auth } from '../../services/auth';
   styleUrl: './login.css'
 })
 export class Login {
+
   email = '';
   password = '';
 
@@ -24,6 +25,7 @@ export class Login {
   ) {}
 
   login() {
+
     this.mensaje = '';
     this.error = '';
 
@@ -33,36 +35,72 @@ export class Login {
     };
 
     this.auth.login(data).subscribe({
+
       next: (response) => {
+
         console.log('Respuesta login:', response);
 
         if (response.mensaje === 'Correo o contraseña inválidos') {
+
           this.error = response.mensaje;
           this.mensaje = '';
+
           this.cdr.detectChanges();
+
           return;
         }
 
-        this.mensaje = response.mensaje || 'Inicio de sesión exitoso';
+        localStorage.setItem(
+          'usuarioId',
+          response.usuarioId.toString()
+        );
+
+        localStorage.setItem(
+          'rol',
+          response.rol
+        );
+
+        localStorage.setItem(
+          'nombreCliente',
+          response.nombre
+        );
+
+        this.mensaje =
+          response.mensaje ||
+          'Inicio de sesión exitoso';
+
         this.error = '';
 
-        this.cdr.detectChanges();
+        const rol =
+          response.rol?.toUpperCase();
 
-        if (response.rol === 'ADMINISTRADOR' || response.rol === 'Administrador') {
-          this.router.navigate(['/admin']);
-        } else if (response.rol === 'CLIENTE' || response.rol === 'Cliente') {
-          this.router.navigate(['/cliente']);
+        if (rol === 'ADMINISTRADOR') {
+
+          this.router.navigate([
+            '/admin/productos'
+          ]);
+
+        } else if (rol === 'CLIENTE') {
+
+          this.router.navigate([
+            '/cliente/catalogo'
+          ]);
+
         } else {
+
           this.error = 'Rol no reconocido';
           this.mensaje = '';
         }
 
         this.cdr.detectChanges();
       },
+
       error: (err) => {
+
         console.log('Error login:', err);
 
         this.mensaje = '';
+
         this.error =
           err.error?.mensaje ||
           'Correo o contraseña inválidos';
@@ -73,6 +111,9 @@ export class Login {
   }
 
   irARegistro() {
-    this.router.navigate(['/registro']);
+
+    this.router.navigate([
+      '/registro'
+    ]);
   }
 }

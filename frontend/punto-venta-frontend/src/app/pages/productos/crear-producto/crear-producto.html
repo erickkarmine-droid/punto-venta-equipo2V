@@ -1,0 +1,100 @@
+<app-admin-navbar></app-admin-navbar>
+<div class="page-container">
+
+  <div class="form-card">
+
+    <h1>Registrar producto</h1>
+
+    <form (ngSubmit)="registrarProducto()">
+
+      <label>Imagen (URL)</label>
+      <input
+        type="text"
+        name="imagenUrl"
+        placeholder="https://imagen.com/producto.jpg"
+        [(ngModel)]="imagenUrl">
+
+      <label>Código de barras</label>
+      <input
+        type="text"
+        name="codigoBarras"
+        placeholder="Código opcional"
+        [(ngModel)]="codigoBarras">
+
+      <label>Nombre</label>
+      <input
+        type="text"
+        name="nombre"
+        placeholder="Nombre del producto"
+        [(ngModel)]="nombre">
+
+      <label>Categoría</label>
+      <select
+        name="categoriaId"
+        [(ngModel)]="categoriaId">
+
+        <option [ngValue]="null">
+          Seleccione una categoría
+        </option>
+
+        @for (categoria of categorias; track categoria.idCategoria) {
+          <option [ngValue]="categoria.idCategoria">
+            {{ categoria.categoria }}
+          </option>
+        }
+
+      </select>
+
+      <label>Descripción</label>
+      <textarea
+        rows="4"
+        name="descripcion"
+        placeholder="Descripción del producto"
+        [(ngModel)]="descripcion">
+      </textarea>
+
+      <label>Precio de compra</label>
+      <input
+        type="number"
+        step="0.01"
+        name="precioCompra"
+        [(ngModel)]="precioCompra">
+
+      <label>Precio de venta</label>
+      <input
+        type="number"
+        step="0.01"
+        name="precioVenta"
+        [(ngModel)]="precioVenta">
+
+      <label>Stock</label>
+      <input
+        type="number"
+        name="stockActual"
+        min="0"
+        max="500"
+        step="1"
+        placeholder="0"
+        [(ngModel)]="stockActual">
+
+      <button
+        type="submit"
+        class="primary-btn">
+        Registrar
+      </button>
+
+      <button
+        type="button"
+        class="secondary-btn"
+        (click)="cancelar()">
+        Cancelar
+      </button>
+
+      <p class="success">{{ mensaje }}</p>
+      <p class="error">{{ error }}</p>
+
+    </form>
+
+  </div>
+
+</div>

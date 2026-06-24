@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.equipo2.pos.dto.LoginRequest;
-import org.springframework.http.ResponseEntity;
 
 
 @RestController

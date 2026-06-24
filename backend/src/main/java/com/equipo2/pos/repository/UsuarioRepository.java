@@ -3,7 +3,6 @@ package com.equipo2.pos.repository;
 import com.equipo2.pos.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-
 import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {

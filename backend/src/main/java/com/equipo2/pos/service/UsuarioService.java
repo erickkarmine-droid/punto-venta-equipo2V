@@ -8,6 +8,8 @@ import com.equipo2.pos.repository.UsuarioRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService {
 
@@ -91,9 +93,74 @@ public class UsuarioService {
         }
 
         return new LoginResponse(
-                "Inicio de sesión exitoso",
-                usuario.getRol(),
-                usuario.getId()
+        "Inicio de sesión exitoso",
+        usuario.getRol(),
+        usuario.getId(),
+        usuario.getNombre() + " " + usuario.getApellidoPaterno() + " " + usuario.getApellidoMaterno()
         );
+    }
+
+    public List<Usuario> listarUsuarios(String busqueda, String filtroRol) {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+
+        return usuarios.stream()
+                .filter(usuario -> filtrarPorRol(usuario, filtroRol))
+                .filter(usuario -> filtrarPorBusqueda(usuario, busqueda))
+                .toList();
+    }
+
+    private boolean filtrarPorRol(Usuario usuario, String filtroRol) {
+        if (filtroRol == null || filtroRol.equalsIgnoreCase("AMBOS")) {
+            return true;
+        }
+
+        return usuario.getRol().equalsIgnoreCase(filtroRol);
+    }
+
+    private boolean filtrarPorBusqueda(Usuario usuario, String busqueda) {
+        if (busqueda == null || busqueda.trim().isEmpty()) {
+            return true;
+        }
+
+        String texto = busqueda.toLowerCase();
+
+        return usuario.getNombre().toLowerCase().contains(texto) ||
+                usuario.getEmail().toLowerCase().contains(texto);
+    }
+
+    public Usuario convertirAAdministrador(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        usuario.setRol("ADMINISTRADOR");
+
+        return usuarioRepository.save(usuario);
+    }
+
+    public Usuario eliminarAdministrador(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        usuario.setRol("CLIENTE");
+
+        return usuarioRepository.save(usuario);
+    }
+
+    public Usuario desactivarUsuario(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        usuario.setActivo(false);
+
+        return usuarioRepository.save(usuario);
+    }
+
+    public Usuario reactivarUsuario(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        usuario.setActivo(true);
+
+        return usuarioRepository.save(usuario);
     }
 }

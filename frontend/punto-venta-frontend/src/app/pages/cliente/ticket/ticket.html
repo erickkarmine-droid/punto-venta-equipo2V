@@ -1,0 +1,57 @@
+<app-cliente-navbar></app-cliente-navbar>
+
+<div class="page-container">
+
+  <div class="ticket-card">
+
+    <h1>Ticket de compra</h1>
+
+    <p class="question">
+      ¿Qué desea hacer con su ticket de compra?
+    </p>
+
+    <div class="ticket-info">
+
+      <p>
+        <strong>Folio:</strong>
+        {{ folio }}
+      </p>
+
+      <p>
+        <strong>Fecha y hora:</strong>
+        {{ fecha }}
+      </p>
+
+      <p>
+        <strong>Cliente:</strong>
+        {{ nombreCliente }}
+      </p>
+
+      <p>
+        <strong>Total pagado:</strong>
+        ${{ total.toFixed(2) }}
+      </p>
+
+    </div>
+
+    <div class="acciones">
+
+      <button
+        class="download-btn"
+        type="button"
+        (click)="descargarTicket()">
+        Descargar ticket
+      </button>
+
+      <button
+        class="back-btn"
+        type="button"
+        (click)="regresar()">
+        Regresar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

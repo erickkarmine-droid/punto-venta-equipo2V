@@ -1,0 +1,53 @@
+<app-cliente-navbar></app-cliente-navbar>
+
+<div class="page-container">
+
+  <h1>Historial de compras</h1>
+
+  @if (compras.length === 0) {
+
+    <div class="empty-state">
+      No hay compras registradas
+    </div>
+
+  } @else {
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Número de pedido</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (compra of compras; track compra.numeroPedido) {
+
+          <tr>
+
+            <td>
+              {{ compra.fecha }}
+            </td>
+
+            <td>
+              {{ compra.numeroPedido }}
+            </td>
+
+            <td>
+              ${{ compra.total.toFixed(2) }}
+            </td>
+
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+
+  }
+
+</div>

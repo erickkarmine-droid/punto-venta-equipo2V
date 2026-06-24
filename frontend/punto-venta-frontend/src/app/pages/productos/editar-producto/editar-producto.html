@@ -1,0 +1,92 @@
+<app-admin-navbar></app-admin-navbar>
+<div class="page-container">
+
+  <div class="form-card">
+
+    <h1>Editar producto</h1>
+
+    <form (ngSubmit)="actualizarProducto()">
+
+      <label>Imagen (URL)</label>
+      <input
+        type="text"
+        name="imagenUrl"
+        [(ngModel)]="imagenUrl">
+
+      <label>Código de barras</label>
+      <input
+        type="text"
+        name="codigoBarras"
+        [(ngModel)]="codigoBarras">
+
+      <label>Nombre</label>
+      <input
+        type="text"
+        name="nombre"
+        [(ngModel)]="nombre">
+
+      <label>Categoría</label>
+      <select
+        name="categoriaId"
+        [(ngModel)]="categoriaId">
+
+        @for (categoria of categorias; track categoria.idCategoria) {
+          <option [ngValue]="categoria.idCategoria">
+            {{ categoria.categoria }}
+          </option>
+        }
+
+      </select>
+
+      <label>Descripción</label>
+      <textarea
+        rows="4"
+        name="descripcion"
+        [(ngModel)]="descripcion">
+      </textarea>
+
+      <label>Precio compra</label>
+      <input
+        type="number"
+        step="0.01"
+        name="precioCompra"
+        [(ngModel)]="precioCompra">
+
+      <label>Precio venta</label>
+      <input
+        type="number"
+        step="0.01"
+        name="precioVenta"
+        [(ngModel)]="precioVenta">
+
+      <label>Stock</label>
+      <input
+        type="number"
+        name="stockActual"
+        min="0"
+        max="500"
+        step="1"
+        placeholder="0"
+        [(ngModel)]="stockActual">
+
+      <button
+        type="submit"
+        class="primary-btn">
+        Actualizar
+      </button>
+
+      <button
+        type="button"
+        class="secondary-btn"
+        (click)="cancelar()">
+        Cancelar
+      </button>
+
+      <p class="success">{{ mensaje }}</p>
+      <p class="error">{{ error }}</p>
+
+    </form>
+
+  </div>
+
+</div>

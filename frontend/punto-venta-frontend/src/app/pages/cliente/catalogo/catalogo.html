@@ -1,0 +1,79 @@
+<app-cliente-navbar></app-cliente-navbar>
+
+<div class="page-container">
+
+  <h1>Catálogo de productos</h1>
+
+  <div class="filtros">
+
+    <input
+      type="text"
+      placeholder="Buscar producto"
+      [(ngModel)]="busqueda"
+      (input)="filtrar()">
+
+    <select
+      [(ngModel)]="categoriaId"
+      (change)="filtrar()">
+
+      <option [ngValue]="null">
+        Todas las categorías
+      </option>
+
+      @for (categoria of categorias; track categoria.idCategoria) {
+
+        <option [ngValue]="categoria.idCategoria">
+          {{ categoria.categoria }}
+        </option>
+
+      }
+
+    </select>
+
+  </div>
+
+  <div class="productos-grid">
+
+    @for (producto of productosFiltrados; track producto.id) {
+
+      <div class="producto-card">
+
+        <img
+          class="producto-imagen"
+          [src]="producto.imagenUrl || 'https://placehold.co/300x200/png'"
+          alt="Producto"
+          (error)="producto.imagenUrl='https://placehold.co/300x200/png'">
+
+        <h3>{{ producto.nombre }}</h3>
+
+        <p>
+          <strong>Categoría:</strong>
+          {{ producto.categoria?.categoria }}
+        </p>
+
+        <p>{{ producto.descripcion }}</p>
+
+        <p>
+          <strong>Precio:</strong>
+          ${{ producto.precioVenta }}
+        </p>
+
+        <p>
+          <strong>Stock:</strong>
+          {{ producto.stockActual }}
+        </p>
+
+        <button
+        type="button"
+        [disabled]="producto.stockActual <= 0"
+        (click)="agregarAlCarrito(producto)">
+        Agregar al carrito
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

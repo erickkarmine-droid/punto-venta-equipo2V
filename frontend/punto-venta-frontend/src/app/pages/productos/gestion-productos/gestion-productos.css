@@ -1,0 +1,198 @@
+.productos-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding: 36px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+  color: #0f172a;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.header-actions input {
+  width: 320px;
+  padding: 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+}
+
+.primary-btn {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 13px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.stock-alert-card {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #f59e0b;
+  padding: 16px 18px;
+  border-radius: 14px;
+  margin-bottom: 24px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+.products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.product-row {
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 160px 1fr 110px;
+  gap: 20px;
+  align-items: center;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.1);
+}
+
+.product-image {
+  width: 160px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #e2e8f0;
+}
+
+.product-info h2 {
+  margin: 0 0 8px;
+  color: #0f172a;
+}
+
+.product-info p {
+  margin: 4px 0;
+  color: #334155;
+}
+
+.stock-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.stock-section label {
+  font-weight: 800;
+  color: #334155;
+}
+
+.warning-icon {
+  margin-left: 5px;
+}
+
+.stock-section input {
+  width: 90px;
+  padding: 9px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+}
+
+.stock-btn {
+  background: #16a34a;
+  color: white;
+  border: none;
+  padding: 10px 13px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.icon-btn {
+  border: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.edit-btn {
+  background: #2563eb;
+  color: white;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-card {
+  width: 440px;
+  background: white;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(0,0,0,.25);
+  text-align: center;
+}
+
+.modal-card p {
+  color: #334155;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.accept-btn {
+  flex: 1;
+  border: none;
+  background: #ef4444;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+.cancel-btn {
+  flex: 1;
+  border: 1px solid #2563eb;
+  background: white;
+  color: #2563eb;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+}

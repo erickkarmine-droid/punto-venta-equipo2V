@@ -1,0 +1,52 @@
+.admin-layout {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.admin-navbar {
+  height: 72px;
+  padding: 0 32px;
+  background: #1d4ed8;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-buttons button {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: white;
+  color: #1d4ed8;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.nav-buttons .logout {
+  background: #ef4444;
+  color: white;
+}
+
+.admin-content {
+  padding: 36px;
+}
+
+.admin-content h1 {
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.admin-content p {
+  color: #64748b;
+}

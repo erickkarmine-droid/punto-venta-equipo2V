@@ -1,0 +1,115 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="page-container">
+
+  <h1>Gestión de categorías</h1>
+
+  <div class="toolbar">
+
+    <input
+      type="text"
+      placeholder="Buscar categoría"
+      [(ngModel)]="busqueda"
+      (input)="buscar()">
+
+    <button type="button" (click)="abrirModal()">
+      Crear categoría
+    </button>
+
+  </div>
+
+  <div class="categorias-list">
+
+    @for (categoria of categoriasFiltradas; track categoria.idCategoria) {
+
+      <div class="categoria-card">
+
+        <span>
+          {{ categoria.categoria }}
+        </span>
+
+        <button
+          class="delete-btn"
+          type="button"
+          (click)="abrirModalEliminar(categoria)">
+          Eliminar
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>
+
+@if (mostrarModal) {
+  <div class="modal-overlay">
+
+    <div class="modal-card">
+
+      <h2>Registrar categoría</h2>
+
+      <label>Nombre de la categoría:</label>
+
+      <input
+        type="text"
+        placeholder="Nombre de la categoría"
+        [(ngModel)]="nuevaCategoria">
+
+      <div class="modal-actions">
+
+        <button
+          class="primary-btn"
+          type="button"
+          (click)="registrarCategoria()">
+          Registrar
+        </button>
+
+        <button
+          class="secondary-btn"
+          type="button"
+          (click)="cerrarModal()">
+          Cancelar
+        </button>
+
+      </div>
+
+      <p class="error">{{ error }}</p>
+
+    </div>
+
+  </div>
+}
+
+@if (mostrarModalEliminar) {
+  <div class="modal-overlay">
+
+    <div class="modal-card">
+
+      <p class="modal-message">
+        ¿Desea continuar con la eliminación de la categoría seleccionada?
+      </p>
+
+      <div class="modal-actions">
+
+        <button
+          class="primary-btn danger"
+          type="button"
+          (click)="confirmarEliminacion()">
+          Aceptar
+        </button>
+
+        <button
+          class="secondary-btn"
+          type="button"
+          (click)="cancelarEliminacion()">
+          Cancelar
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+}

@@ -1,0 +1,75 @@
+<app-cliente-navbar></app-cliente-navbar>
+
+<div class="page-container">
+
+  <h1>Resumen del pedido</h1>
+
+  <div class="productos-container">
+
+    @for (producto of productos; track producto.id) {
+
+      <div class="producto-card">
+
+        <img
+          class="producto-imagen"
+          [src]="producto.imagenUrl || 'https://placehold.co/300x200/png'"
+          alt="Producto">
+
+        <div class="producto-info">
+
+          <p>
+            <strong>Nombre del producto:</strong>
+            {{ producto.nombre }}
+          </p>
+
+          <p>
+            <strong>Cantidad:</strong>
+            {{ producto.cantidad }}
+          </p>
+
+          <p>
+            <strong>Precio unitario:</strong>
+            ${{ producto.precioVenta.toFixed(2) }}
+          </p>
+
+          <p>
+            <strong>Subtotal:</strong>
+            ${{ (producto.precioVenta * producto.cantidad).toFixed(2) }}
+          </p>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+  <div class="resumen-card">
+
+    <p class="total">
+      Total a pagar:
+      ${{ total.toFixed(2) }}
+    </p>
+
+    <div class="acciones">
+
+      <button
+        class="confirmar-btn"
+        type="button"
+        (click)="confirmarCompra()">
+        Confirmar la compra
+      </button>
+
+      <button
+        class="cancelar-btn"
+        type="button"
+        (click)="cancelar()">
+        Cancelar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

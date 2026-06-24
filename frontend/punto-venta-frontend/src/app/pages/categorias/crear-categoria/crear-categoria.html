@@ -1,0 +1,34 @@
+<app-admin-navbar></app-admin-navbar>
+
+<div class="page-container">
+
+  <div class="form-card">
+
+    <h1>Crear categoría</h1>
+
+    <form (ngSubmit)="registrarCategoria()">
+
+      <label>Nombre de la categoría</label>
+
+      <input
+        type="text"
+        name="categoria"
+        placeholder="Ingresa el nombre de la categoría"
+        [(ngModel)]="categoria">
+
+      <button class="primary-btn" type="submit">
+        Registrar
+      </button>
+
+      <button class="secondary-btn" type="button" (click)="cancelar()">
+        Cancelar
+      </button>
+
+      <p class="success">{{ mensaje }}</p>
+      <p class="error">{{ error }}</p>
+
+    </form>
+
+  </div>
+
+</div>

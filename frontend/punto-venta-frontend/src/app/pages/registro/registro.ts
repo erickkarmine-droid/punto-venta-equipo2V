@@ -30,6 +30,13 @@ export class Registro {
 
   registrar() {
 
+     if (!/^\d{10}$/.test(this.telefono)) {
+    this.error = 'Debe ingresar todos los campos correctamente';
+    this.mensaje = '';
+    this.cdr.detectChanges();
+    return;
+    }
+    
     const data = {
       nombre: this.nombre,
       apellidoPaterno: this.apellidoPaterno,
