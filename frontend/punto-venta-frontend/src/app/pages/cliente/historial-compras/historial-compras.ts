@@ -35,7 +35,7 @@
       }
 
       this.http.get<any[]>(
-        `http://localhost:8080/api/ventas/cliente/${usuarioId}`
+        `https://punto-venta-equipo2v-production.up.railway.app/api/ventas/cliente/${usuarioId}`
       ).subscribe({
         next: (data) => {
           this.compras = data;

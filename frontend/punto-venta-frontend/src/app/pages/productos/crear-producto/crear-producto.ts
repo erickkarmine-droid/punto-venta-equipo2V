@@ -38,7 +38,7 @@ export class CrearProducto implements OnInit {
   }
 
   cargarCategorias() {
-    this.http.get<any[]>('http://localhost:8080/api/categorias')
+    this.http.get<any[]>('https://punto-venta-equipo2v-production.up.railway.app/api/categorias')
       .subscribe({
         next: (data) => {
           this.categorias = data;
@@ -98,7 +98,7 @@ export class CrearProducto implements OnInit {
       categoriaId: this.categoriaId
     };
 
-    this.http.post('http://localhost:8080/api/productos', data)
+    this.http.post('https://punto-venta-equipo2v-production.up.railway.app/api/productos', data)
       .subscribe({
         next: () => {
           this.mensaje = 'Producto registrado correctamente';

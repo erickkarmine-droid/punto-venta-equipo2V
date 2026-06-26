@@ -31,7 +31,7 @@ export class CrearCategoria {
       categoria: this.categoria
     };
 
-    this.http.post('http://localhost:8080/api/categorias', data)
+    this.http.post('https://punto-venta-equipo2v-production.up.railway.app/api/categorias', data)
       .subscribe({
         next: () => {
           this.mensaje = 'Categoría registrada correctamente';

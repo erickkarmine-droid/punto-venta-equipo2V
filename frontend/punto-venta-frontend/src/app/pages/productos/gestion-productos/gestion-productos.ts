@@ -34,7 +34,7 @@ export class GestionProductos implements OnInit {
   }
 
   cargarProductos() {
-    this.http.get<any[]>('http://localhost:8080/api/productos')
+    this.http.get<any[]>('https://punto-venta-equipo2v-production.up.railway.app/api/productos')
       .subscribe({
         next: (data) => {
           this.productos = data;
@@ -119,7 +119,7 @@ export class GestionProductos implements OnInit {
     }
 
     this.http.delete(
-      `http://localhost:8080/api/productos/${this.productoAEliminar.id}`
+      `https://punto-venta-equipo2v-production.up.railway.app/api/productos/${this.productoAEliminar.id}`
     ).subscribe({
       next: () => {
         this.productoAEliminar = null;
@@ -136,7 +136,7 @@ export class GestionProductos implements OnInit {
 
   reactivarProducto(producto: any) {
     this.http.put(
-      `http://localhost:8080/api/productos/${producto.id}/reactivar`,
+      `https://punto-venta-equipo2v-production.up.railway.app/api/productos/${producto.id}/reactivar`,
       {}
     ).subscribe({
       next: () => {
@@ -165,7 +165,7 @@ export class GestionProductos implements OnInit {
     };
 
     this.http.put(
-      `http://localhost:8080/api/productos/${producto.id}/stock`,
+      `https://punto-venta-equipo2v-production.up.railway.app/api/productos/${producto.id}/stock`,
       data
     ).subscribe({
       next: () => {

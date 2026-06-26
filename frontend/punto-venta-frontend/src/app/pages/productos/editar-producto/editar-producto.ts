@@ -42,7 +42,7 @@ export class EditarProducto implements OnInit {
   }
 
   cargarCategorias() {
-    this.http.get<any[]>('http://localhost:8080/api/categorias')
+    this.http.get<any[]>('https://punto-venta-equipo2v-production.up.railway.app/api/categorias')
       .subscribe({
         next: (data) => {
           this.categorias = data;
@@ -57,7 +57,7 @@ export class EditarProducto implements OnInit {
 
   cargarProducto() {
     this.http.get<any>(
-      `http://localhost:8080/api/productos/${this.productoId}`
+      `https://punto-venta-equipo2v-production.up.railway.app/api/productos/${this.productoId}`
     ).subscribe({
       next: (producto) => {
         this.codigoBarras = producto.codigoBarras || '';
@@ -126,7 +126,7 @@ export class EditarProducto implements OnInit {
     };
 
     this.http.put(
-      `http://localhost:8080/api/productos/${this.productoId}`,
+      `https://punto-venta-equipo2v-production.up.railway.app/api/productos/${this.productoId}`,
       data
     ).subscribe({
       next: () => {

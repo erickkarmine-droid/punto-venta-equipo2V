@@ -31,7 +31,7 @@ export class Catalogo implements OnInit {
   }
 
   cargarProductos() {
-  this.http.get<any[]>('http://localhost:8080/api/productos')
+  this.http.get<any[]>('https://punto-venta-equipo2v-production.up.railway.app/api/productos')
     .subscribe({
       next: (data) => {
         this.productos = data.filter(producto =>
@@ -46,7 +46,7 @@ export class Catalogo implements OnInit {
 }
 
   cargarCategorias() {
-    this.http.get<any[]>('http://localhost:8080/api/categorias')
+    this.http.get<any[]>('https://punto-venta-equipo2v-production.up.railway.app/api/categorias')
       .subscribe({
         next: (data) => {
           this.categorias = data;

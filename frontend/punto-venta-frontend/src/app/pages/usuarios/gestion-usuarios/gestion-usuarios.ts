@@ -36,7 +36,7 @@ export class GestionUsuarios implements OnInit {
     const params = `?busqueda=${this.busqueda}&rol=${this.filtroRol}`;
 
     this.http.get<any[]>(
-      `http://localhost:8080/api/usuarios${params}`
+      `https://punto-venta-equipo2v-production.up.railway.app/api/usuarios${params}`
     ).subscribe({
       next: (data) => {
         this.usuarios = data;
@@ -67,7 +67,7 @@ export class GestionUsuarios implements OnInit {
 
   hacerAdministrador(usuario: any) {
     this.http.put(
-      `http://localhost:8080/api/usuarios/${usuario.id}/hacer-administrador`,
+      `https://punto-venta-equipo2v-production.up.railway.app/api/usuarios/${usuario.id}/hacer-administrador`,
       {}
     ).subscribe({
       next: () => this.cargarUsuarios()
@@ -111,7 +111,7 @@ export class GestionUsuarios implements OnInit {
 
     if (this.accionModal === 'eliminarAdmin') {
       this.http.put(
-        `http://localhost:8080/api/usuarios/${this.usuarioSeleccionado.id}/eliminar-administrador`,
+        `https://punto-venta-equipo2v-production.up.railway.app/api/usuarios/${this.usuarioSeleccionado.id}/eliminar-administrador`,
         {}
       ).subscribe({
         next: () => {
@@ -123,7 +123,7 @@ export class GestionUsuarios implements OnInit {
 
     if (this.accionModal === 'desactivar') {
       this.http.put(
-        `http://localhost:8080/api/usuarios/${this.usuarioSeleccionado.id}/desactivar`,
+        `https://punto-venta-equipo2v-production.up.railway.app/api/usuarios/${this.usuarioSeleccionado.id}/desactivar`,
         {}
       ).subscribe({
         next: () => {
@@ -136,7 +136,7 @@ export class GestionUsuarios implements OnInit {
 
   reactivar(usuario: any) {
     this.http.put(
-      `http://localhost:8080/api/usuarios/${usuario.id}/reactivar`,
+      `https://punto-venta-equipo2v-production.up.railway.app/api/usuarios/${usuario.id}/reactivar`,
       {}
     ).subscribe({
       next: () => this.cargarUsuarios()

@@ -37,7 +37,7 @@ export class GestionCategorias implements OnInit {
   }
 
   cargarCategorias() {
-    this.http.get<any[]>('http://localhost:8080/api/categorias')
+    this.http.get<any[]>('https://punto-venta-equipo2v-production.up.railway.app/api/categorias')
       .subscribe({
         next: (data) => {
           this.categorias = data;
@@ -55,7 +55,7 @@ export class GestionCategorias implements OnInit {
     }
 
     this.http.get<any[]>(
-      `http://localhost:8080/api/categorias/buscar?categoria=${this.busqueda}`
+      `https://punto-venta-equipo2v-production.up.railway.app/api/categorias/buscar?categoria=${this.busqueda}`
     ).subscribe({
       next: (data) => {
         this.categoriasFiltradas = data;
@@ -88,7 +88,7 @@ export class GestionCategorias implements OnInit {
       categoria: this.nuevaCategoria
     };
 
-    this.http.post('http://localhost:8080/api/categorias', data)
+    this.http.post('https://punto-venta-equipo2v-production.up.railway.app/api/categorias', data)
       .subscribe({
         next: () => {
           this.cargarCategorias();
@@ -122,7 +122,7 @@ export class GestionCategorias implements OnInit {
     }
 
     this.http.delete(
-      `http://localhost:8080/api/categorias/${this.categoriaAEliminar.idCategoria}`
+      `https://punto-venta-equipo2v-production.up.railway.app/api/categorias/${this.categoriaAEliminar.idCategoria}`
     ).subscribe({
       next: () => {
         this.cancelarEliminacion();

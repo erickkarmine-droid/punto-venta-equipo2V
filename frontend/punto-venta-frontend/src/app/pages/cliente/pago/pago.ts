@@ -93,7 +93,7 @@ export class Pago {
     };
 
     this.http.post<any>(
-      'http://localhost:8080/api/ventas/finalizar',
+      'https://punto-venta-equipo2v-production.up.railway.app/api/ventas/finalizar',
       ventaRequest
     )
     .pipe(
