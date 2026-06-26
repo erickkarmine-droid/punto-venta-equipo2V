@@ -53,28 +53,34 @@ export class GestionProductos implements OnInit {
   }
 
   aplicarFiltros() {
-    let resultado = this.productos;
+  let resultado = [...this.productos];
 
-    if (this.busqueda.trim()) {
-      resultado = resultado.filter(producto =>
-        producto.nombre
-          .toLowerCase()
-          .includes(this.busqueda.toLowerCase())
-      );
-    }
+  const texto = this.busqueda.trim().toLowerCase();
 
-    if (this.soloStockBajo) {
-      resultado = resultado.filter(producto =>
-        producto.stockActual <= 5
-      );
-    }
-
-    this.productosFiltrados = resultado;
+  if (texto) {
+    resultado = resultado.filter(producto =>
+      producto.nombre?.toLowerCase().includes(texto) ||
+      producto.categoria?.categoria?.toLowerCase().includes(texto) ||
+      producto.descripcion?.toLowerCase().includes(texto)
+    );
   }
+
+  if (this.soloStockBajo) {
+    resultado = resultado.filter(producto =>
+      producto.activo === true &&
+      producto.stockActual <= 5
+    );
+  }
+
+  this.productosFiltrados = resultado;
+  this.cdr.detectChanges();
+}
 
   get cantidadStockBajo(): number {
     return this.productos.filter(
-      producto => producto.stockActual <= 5
+      producto =>
+        producto.activo === true &&
+        producto.stockActual <= 5
     ).length;
   }
 
@@ -96,43 +102,55 @@ export class GestionProductos implements OnInit {
   }
 
   abrirModalEliminar(producto: any) {
-
-  console.log('CLICK ELIMINAR', producto);
-
-  this.productoAEliminar = producto;
-
-  this.mostrarModalEliminar = true;
-
-  this.cdr.detectChanges();
-
-}
-
-  cancelarEliminacion() {
-  this.productoAEliminar = null;
-  this.mostrarModalEliminar = false;
-  this.cdr.detectChanges();
-}
-
-confirmarEliminacion() {
-  if (!this.productoAEliminar) {
-    return;
+    this.productoAEliminar = producto;
+    this.mostrarModalEliminar = true;
+    this.cdr.detectChanges();
   }
 
-  this.http.delete(
-    `http://localhost:8080/api/productos/${this.productoAEliminar.id}`
-  ).subscribe({
-    next: () => {
-      this.productoAEliminar = null;
-      this.mostrarModalEliminar = false;
-      this.cargarProductos();
-      this.cdr.detectChanges();
-    },
-    error: (err) => {
-      console.error(err);
-      this.cdr.detectChanges();
+  cancelarEliminacion() {
+    this.productoAEliminar = null;
+    this.mostrarModalEliminar = false;
+    this.cdr.detectChanges();
+  }
+
+  confirmarEliminacion() {
+    if (!this.productoAEliminar) {
+      return;
     }
-  });
-}
+
+    this.http.delete(
+      `http://localhost:8080/api/productos/${this.productoAEliminar.id}`
+    ).subscribe({
+      next: () => {
+        this.productoAEliminar = null;
+        this.mostrarModalEliminar = false;
+        this.cargarProductos();
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error(err);
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  reactivarProducto(producto: any) {
+    this.http.put(
+      `http://localhost:8080/api/productos/${producto.id}/reactivar`,
+      {}
+    ).subscribe({
+      next: () => {
+        alert('Producto reactivado correctamente');
+        this.cargarProductos();
+      },
+      error: (err) => {
+        alert(
+          err.error?.mensaje ||
+          'No se pudo reactivar el producto'
+        );
+      }
+    });
+  }
 
   guardarStock(producto: any) {
     const stock = Number(producto.stockActual);

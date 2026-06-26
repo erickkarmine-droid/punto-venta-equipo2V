@@ -24,21 +24,13 @@
 
       <tbody>
 
-        @for (compra of compras; track compra.numeroPedido) {
+        @for (compra of compras; track compra.folio) {
 
           <tr>
 
-            <td>
-              {{ compra.fecha }}
-            </td>
-
-            <td>
-              {{ compra.numeroPedido }}
-            </td>
-
-            <td>
-              ${{ compra.total.toFixed(2) }}
-            </td>
+            <td>{{ compra.fechaVenta }}</td>
+            <td>{{ compra.folio }}</td>
+            <td>${{ compra.total.toFixed(2) }}</td>
 
           </tr>
 

@@ -103,21 +103,47 @@
 
         <div class="actions">
 
-          <button
-            class="icon-btn edit-btn"
-            type="button"
-            title="Editar"
-            (click)="editarProducto(producto)">
-            ✏️
-          </button>
+          <div class="actions">
 
           <button
-            class="icon-btn delete-btn"
-            type="button"
-            title="Eliminar"
-            (click)="abrirModalEliminar(producto)">
-            🗑️
-          </button>
+          class="icon-btn edit-btn"
+          type="button"
+          title="Editar"
+          (click)="editarProducto(producto)">
+          ✏️
+        </button>
+
+      @if (producto.activo) {
+
+      <button
+      class="icon-btn delete-btn"
+      type="button"
+      title="Desactivar"
+      (click)="abrirModalEliminar(producto)">
+        🗑️
+      </button>
+
+      }
+
+  @if (!producto.activo) {
+
+    <button
+
+      class="icon-btn"
+
+      type="button"
+
+      title="Reactivar"
+
+      (click)="reactivarProducto(producto)">
+
+      ♻️
+
+    </button>
+
+  }
+
+</div>
 
         </div>
 

@@ -49,11 +49,11 @@ export class GestionUsuarios implements OnInit {
   }
 
   buscar() {
-    if (this.busqueda && !/^[A-Za-zÁÉÍÓÚáéíóúÑñ ]*$/.test(this.busqueda)) {
-      alert('La búsqueda solo permite letras y espacios');
-      this.busqueda = '';
-      this.cargarUsuarios();
-      return;
+    if (this.busqueda && !/^[A-Za-z0-9ÁÉÍÓÚáéíóúÑñ @._-]*$/.test(this.busqueda)) {
+    alert('La búsqueda solo permite letras, números, espacios y caracteres válidos de correo');
+    this.busqueda = '';
+    this.cargarUsuarios();
+    return;
     }
 
     this.cargarUsuarios();

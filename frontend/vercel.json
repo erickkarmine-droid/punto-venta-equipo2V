@@ -1,0 +1,19 @@
+{
+
+  "buildCommand": "npm run build",
+
+  "outputDirectory": "dist/punto-venta-frontend/browser",
+
+  "rewrites": [
+
+    {
+
+      "source": "/(.*)",
+
+      "destination": "/index.html"
+
+    }
+
+  ]
+
+}

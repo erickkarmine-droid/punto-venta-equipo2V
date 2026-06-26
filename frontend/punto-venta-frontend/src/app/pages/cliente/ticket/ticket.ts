@@ -40,39 +40,13 @@ export class Ticket implements OnInit {
       localStorage.getItem('nombreCliente') ||
       'Cliente registrado';
 
-    this.folio = 'TICKET-' + Date.now();
-    this.fecha = new Date().toLocaleString();
+    this.folio =
+      localStorage.getItem('folioVenta') ||
+      'SIN-FOLIO';
 
-    this.guardarEnHistorial();
-  }
-
-  guardarEnHistorial() {
-    if (this.total <= 0) {
-      return;
-    }
-
-    const historial = JSON.parse(
-      localStorage.getItem('historialCompras') || '[]'
-    );
-
-    const yaExiste = historial.some(
-      (compra: any) => compra.numeroPedido === this.folio
-    );
-
-    if (yaExiste) {
-      return;
-    }
-
-    historial.push({
-      fecha: this.fecha,
-      numeroPedido: this.folio,
-      total: this.total
-    });
-
-    localStorage.setItem(
-      'historialCompras',
-      JSON.stringify(historial)
-    );
+    this.fecha =
+      localStorage.getItem('fechaVenta') ||
+      new Date().toLocaleString();
   }
 
   descargarTicket() {
@@ -119,6 +93,9 @@ export class Ticket implements OnInit {
     localStorage.removeItem('totalCompra');
     localStorage.removeItem('montoRecibido');
     localStorage.removeItem('cambio');
+    localStorage.removeItem('ventaId');
+    localStorage.removeItem('folioVenta');
+    localStorage.removeItem('fechaVenta');
 
     this.router.navigate(['/cliente/catalogo']);
   }

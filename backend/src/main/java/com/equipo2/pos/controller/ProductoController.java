@@ -122,4 +122,25 @@ public class ProductoController {
         }
 
     }
+
+    @PutMapping("/{id}/reactivar")
+    public ResponseEntity<?> reactivarProducto(
+            @PathVariable Long id) {
+
+        try {
+
+            Producto producto =
+            productoService.reactivarProducto(id);
+
+            return ResponseEntity.ok(producto);
+
+        } catch (RuntimeException e) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MensajeResponse(
+                            e.getMessage()
+            ));
+        }
+    }
 }

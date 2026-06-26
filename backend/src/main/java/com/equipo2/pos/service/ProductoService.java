@@ -43,7 +43,7 @@ public class ProductoService {
     }
 
     public List<Producto> listarProductosActivos() {
-        return productoRepository.findByActivoTrue();
+    return productoRepository.findAll();
     }
 
     public List<Producto> buscarProductosPorNombre(String nombre) {
@@ -159,5 +159,16 @@ public class ProductoService {
 
     private boolean esVacio(String valor) {
         return valor == null || valor.trim().isEmpty();
+    }
+
+    public Producto reactivarProducto(Long id) {
+
+    Producto producto = productoRepository.findById(id)
+                .orElseThrow(() ->
+                new RuntimeException("Producto no encontrado"));
+
+        producto.setActivo(true);
+
+        return productoRepository.save(producto);
     }
 }
