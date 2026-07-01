@@ -2,8 +2,6 @@ import { Routes } from '@angular/router';
 
 import { Login } from './pages/login/login';
 import { Registro } from './pages/registro/registro';
-import { Cliente } from './pages/cliente/cliente';
-
 
 import { CrearProducto } from './pages/productos/crear-producto/crear-producto';
 import { GestionProductos } from './pages/productos/gestion-productos/gestion-productos';
@@ -19,119 +17,30 @@ import { ResumenCompra } from './pages/cliente/resumen-compra/resumen-compra';
 import { Pago } from './pages/cliente/pago/pago';
 import { Ticket } from './pages/cliente/ticket/ticket';
 
+import { adminGuard } from './guards/admin.guard';
+import { clienteGuard } from './guards/cliente.guard';
+
 export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
+  { path: 'login', component: Login },
+  { path: 'registro', component: Registro },
 
-  {
-    path: 'login',
-    component: Login
-  },
+  { path: 'admin', redirectTo: 'admin/productos', pathMatch: 'full' },
+  { path: 'admin/usuarios', component: GestionUsuarios, canActivate: [adminGuard] },
+  { path: 'admin/categorias', component: GestionCategorias, canActivate: [adminGuard] },
+  { path: 'admin/categorias/nueva', component: CrearCategoria, canActivate: [adminGuard] },
+  { path: 'admin/productos', component: GestionProductos, canActivate: [adminGuard] },
+  { path: 'admin/productos/nuevo', component: CrearProducto, canActivate: [adminGuard] },
+  { path: 'admin/productos/editar/:id', component: EditarProducto, canActivate: [adminGuard] },
 
-  {
-    path: 'registro',
-    component: Registro
-  },
+  { path: 'cliente', redirectTo: 'cliente/catalogo', pathMatch: 'full' },
+  { path: 'cliente/catalogo', component: Catalogo, canActivate: [clienteGuard] },
+  { path: 'cliente/carrito', component: Carrito, canActivate: [clienteGuard] },
+  { path: 'cliente/resumen-compra', component: ResumenCompra, canActivate: [clienteGuard] },
+  { path: 'cliente/pago', component: Pago, canActivate: [clienteGuard] },
+  { path: 'cliente/ticket', component: Ticket, canActivate: [clienteGuard] },
+  { path: 'cliente/historial', component: HistorialCompras, canActivate: [clienteGuard] },
 
-  {
-    path: 'cliente',
-    component: Cliente
-  },
-
-  {
-    path: 'admin',
-    redirectTo: 'admin/productos',
-    pathMatch: 'full'
-  },
-
-  {
-    path: 'admin/usuarios',
-    component: GestionUsuarios
-  },
-
-  {
-    path: 'admin/categorias',
-    component: GestionCategorias
-  },
-
-  {
-    path: 'admin/categorias/nueva',
-    component: CrearCategoria
-  },
-
-  {
-    path: 'admin/productos',
-    component: GestionProductos
-  },
-
-  {
-    path: 'admin/productos/nuevo',
-    component: CrearProducto
-  },
-
-  {
-    path: 'admin/productos/editar/:id',
-    component: EditarProducto
-  },
-
-  {
-  path: 'cliente/catalogo',
-  component: Catalogo
-  },
-
-  {
-  path: 'cliente/carrito',
-  component: Carrito
-  },
-
-  {
-  path: 'cliente/resumen-compra',
-  component: ResumenCompra
-  },
-
-  {
-  path: 'cliente/pago',
-  component: Pago
-  },
-
-  {
-  path: 'cliente/ticket',
-  component: Ticket
-  },
-
-  {
-  path: 'cliente/historial',
-  component: HistorialCompras
-  },
-
-  {
-  path: 'cliente',
-  redirectTo: 'cliente/catalogo',
-  pathMatch: 'full'
-  },
-
-  {
-  path: 'cliente/catalogo',
-  component: Catalogo
-  },
-
-  {
-  path: 'cliente/carrito',
-  component: Carrito
-  },
-  
-  {
-  path: 'cliente/historial',
-  component: HistorialCompras
-  },
-
-  {
-    path: '**',
-    redirectTo: 'login'
-  }
-
+  { path: '**', redirectTo: 'login' }
 ];
